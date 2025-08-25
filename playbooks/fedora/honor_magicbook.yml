@@ -8,7 +8,7 @@
     hyprland_autostart: ["clipman store --no-persists"]
   tasks:
     - name: Check GNOME
-      fail:
+      ansible.builtin.fail:
         msg: GNOME environment detected. You need to switch to TTY to continue
       when: lookup('ansible.builtin.env', 'XDG_CURRENT_DESKTOP') == 'GNOME'
 
@@ -34,9 +34,10 @@
       become: true
 
     - name: Set ELECTRON_OZONE_PLATFORM_HINT variable
-      copy:
+      ansible.builtin.copy:
         content: export ELECTRON_OZONE_PLATFORM_HINT=auto
         dest: ~/.profile
+        mode: u=rw,g=r,o=r
 
     - name: Setup user directories
       vars:
