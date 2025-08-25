@@ -2,6 +2,10 @@
 - name: Fedora Workstation Honor Magicbook
   hosts: localhost
   connection: local
+  vars:
+    rclone_directory: ~/gdrive
+    hyprland_monitors_manual: ["monitor=,preferred,auto,1.6"]
+    hyprland_autostart: ["clipman store --no-persists"]
   tasks:
     - name: Check GNOME
       fail:
@@ -28,6 +32,11 @@
         state: present
         disable_gpg_check: true
       become: true
+
+    - name: Set ELECTRON_OZONE_PLATFORM_HINT variable
+      copy:
+        content: export ELECTRON_OZONE_PLATFORM_HINT=auto
+        dest: ~/.profile
 
     - name: Setup user directories
       vars:
@@ -81,6 +90,8 @@
         - greetd
         - kitty
         - hyprland
+        - rclone
+        - rofi
         - vscode
       loop_control:
         loop_var: role
