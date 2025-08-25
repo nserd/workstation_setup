@@ -3,6 +3,11 @@
   hosts: localhost
   connection: local
   tasks:
+    - name: Check GNOME
+      fail:
+        msg: GNOME environment detected. You need to switch to TTY to continue
+      when: lookup('ansible.builtin.env', 'XDG_CURRENT_DESKTOP') == 'GNOME'
+
     - name: Enable rpmfusion
       ansible.builtin.dnf:
         name:
