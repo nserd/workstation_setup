@@ -17,7 +17,6 @@
     - name: Disable GDM
       ansible.builtin.systemd:
         name: gdm
-        state: stopped
         enabled: false
       become: true
 
