@@ -14,6 +14,8 @@ if [ ! -d "$LOCAL_REPO_PATH" ]; then
     git clone https://github.com/nserd/workstation_setup.git $HOME/.ws_setup
     cd $HOME/.ws_setup
     ansible-galaxy install -r requirements.yml
+else
+    cd $HOME/.ws_setup
 fi
 
 shift
