@@ -9,7 +9,7 @@ if [ ! -d "$LOCAL_REPO_PATH" ]; then
     python get-pip.py
     rm get-pip.py
     pip install ansible
-    sudo dnf install -y git
+    sudo dnf install -y git python3-libdnf-5
 
     git clone https://github.com/nserd/workstation_setup.git $HOME/.ws_setup
     cd $HOME/.ws_setup
