@@ -1,0 +1,62 @@
+---
+- name: Fedora Workstation Honor Magicbook
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Enable rpmfusion
+      ansible.builtin.dnf:
+        name:
+          - "https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_distribution_version }}.noarch.rpm"
+          - "https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_distribution_version }}.noarch.rpm"
+        state: present
+        disable_gpg_check: true
+      become: true
+
+    - name: Setup user directories
+      vars:
+        user_directories:
+          - { name: XDG_DESKTOP_DIR, value: desktop }
+          - { name: XDG_DOWNLOAD_DIR, value: downloads }
+          - { name: XDG_TEMPLATES_DIR, value: templates }
+          - { name: XDG_DOCUMENTS_DIR, value: notes }
+          - { name: XDG_PICTURES_DIR, value: pictures }
+          - { name: XDG_PUBLICSHARE_DIR, value: share }
+          - { name: XDG_MUSIC_DIR, value: music }
+          - { name: XDG_VIDEOS_DIR, value: videos }
+      notify: User directories update
+
+      block:
+        - name: Ensure directories exist
+          ansible.builtin.file:
+            path: "~/{{ item.value }}"
+            state: directory
+            mode: u=rwx,g=rx,o=rx
+          loop: "{{ user_directories }}"
+        - name: Add user directories config
+          ansible.builtin.copy:
+            content: |
+              {% for dir in user_directories %}
+              {{ dir.name }}="$HOME/{{ dir.value }}"
+              {% endfor %}
+            dest: ~/.config/user-dirs.dirs
+            mode: u=rw,g=r,o=r
+
+    - name: Include roles
+      ansible.builtin.include_role:
+        name: "nserd.workstation_collection.{{ role }}"
+      loop:
+        - common_packages
+        - bash
+        - font
+        - greetd
+        - kitty
+        - hyprland
+        - vscode
+      loop_control:
+        loop_var: role
+
+  handlers:
+    - name: User directories update
+      ansible.builtin.command: xdg-user-dirs-update
+      register: xdg_update
+      changed_when: xdg_update.rc == 0 and xdg_update.stdout | length > 0

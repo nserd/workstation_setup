@@ -1,0 +1,5 @@
+---
+collections:
+  - name: nserd.workstation_collection
+    type: git
+    source: https://github.com/nserd/workstation_collection.git
