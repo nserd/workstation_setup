@@ -45,6 +45,19 @@
               {% endfor %}
             dest: ~/.config/user-dirs.dirs
             mode: u=rw,g=r,o=r
+        - name: Remove old directories
+          ansible.builtin.file:
+            path: "~/{{ item }}"
+            state: absent
+          loop:
+            - Desktop
+            - Downloads
+            - Templates
+            - Documents
+            - Pictures
+            - Music
+            - Video
+            - Public
 
     - name: Include roles
       ansible.builtin.include_role:
