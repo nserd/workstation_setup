@@ -8,6 +8,19 @@
         msg: GNOME environment detected. You need to switch to TTY to continue
       when: lookup('ansible.builtin.env', 'XDG_CURRENT_DESKTOP') == 'GNOME'
 
+    - name: Set system to boot into multi-user target (text mode)
+      ansible.builtin.systemd:
+        name: multi-user.target
+        enabled: true
+      become: true
+
+    - name: Disable GDM
+      ansible.builtin.systemd:
+        name: gdm
+        state: stopped
+        enabled: false
+      become: true
+
     - name: Enable rpmfusion
       ansible.builtin.dnf:
         name:
