@@ -2,9 +2,9 @@
 set -e
 
 PLAYBOOK=$1
-LOCAL_REPO_PATH=$HOME/.ws_setup
+LOCAL_REPO_PATH="$HOME/.ws_setup"
 
-if [ -z $LOCAL_REPO_PATH ]; then
+if [ ! -d "$LOCAL_REPO_PATH" ]; then
     curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
     python get-pip.py
     rm get-pip.py
