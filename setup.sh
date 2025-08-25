@@ -9,7 +9,7 @@ rm get-pip.py
 pip install ansible
 sudo dnf install -y git
 
-git clone https://github.com/nserd/workstation_setup.git /tmp/ws_setup
-cd /tmp/ws_setup
+git clone https://github.com/nserd/workstation_setup.git $HOME/.ws_setup
+cd $HOME/.ws_setup
 ansible-galaxy install -r requirements.yml
 ansible-playbook $PLAYBOOK -D
