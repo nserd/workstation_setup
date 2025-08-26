@@ -5,7 +5,7 @@
   vars:
     rclone_directory: ~/gdrive
     hyprland_monitors_manual_enabled: true
-    hyprland_monitors_manual: ["monitor=,preferred,auto,1.733333"]
+    hyprland_monitors_manual: [",preferred,auto,1.733333"]
     hyprland_autostart: ["clipman store --no-persists"]
 
     font_family_monospace: JetBrainsMono Nerd Font
