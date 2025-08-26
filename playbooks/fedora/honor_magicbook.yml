@@ -6,6 +6,13 @@
     rclone_directory: ~/gdrive
     hyprland_monitors_manual: ["monitor=,preferred,auto,1.6"]
     hyprland_autostart: ["clipman store --no-persists"]
+
+    font_family_monospace: JetBrainsMono Nerd Font
+
+    kitty_font_family: "{{ font_family_monospace }}"
+    vscode_font_family: "{{ font_family_monospace }}"
+    hyprland_hyprlock_font_family: "{{ font_family_monospace }}"
+    waybar_font_family: "{{ font_family_monospace }}"
   tasks:
     - name: Check GNOME
       ansible.builtin.fail:
@@ -93,6 +100,7 @@
         - hyprland
         - rclone
         - rofi
+        - waybar
         - vscode
       loop_control:
         loop_var: role
