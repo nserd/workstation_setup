@@ -5,7 +5,7 @@
 
   vars:
     rclone_directory: ~/gdrive
-    waybar_temperature_hwmon_path: /sys/class/hwmon/hwmon2/temp1_input
+    waybar_temperature_hwmon_path: /sys/class/thermal/thermal_zone11/temp
 
     hyprland_monitors_manual_enabled: true
     hyprland_monitors_manual: [",preferred,auto,1.733333"]
