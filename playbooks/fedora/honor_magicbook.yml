@@ -2,11 +2,17 @@
 - name: Fedora Workstation Honor Magicbook
   hosts: localhost
   connection: local
+
   vars:
     rclone_directory: ~/gdrive
+    waybar_temperature_hwmon_path: /sys/class/hwmon/hwmon2/temp1_input
+
     hyprland_monitors_manual_enabled: true
     hyprland_monitors_manual: [",preferred,auto,1.733333"]
-    hyprland_autostart: ["clipman store --no-persists"]
+    hyprland_print_key: F12
+    hyprland_autostart:
+      - clipman store --no-persists
+      - blueman-tray
 
     font_family_monospace: JetBrainsMono Nerd Font
 
@@ -14,6 +20,7 @@
     vscode_font_family: "{{ font_family_monospace }}"
     hyprland_hyprlock_font_family: "{{ font_family_monospace }}"
     waybar_font_family: "{{ font_family_monospace }}"
+
   tasks:
     - name: Check GNOME
       ansible.builtin.fail:
