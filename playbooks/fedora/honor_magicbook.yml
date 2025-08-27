@@ -96,22 +96,17 @@
             - Videos
             - Public
 
-    - name: Include roles
-      ansible.builtin.include_role:
-        name: "nserd.workstation_collection.{{ role }}"
-      loop:
-        - common_packages
-        - bash
-        - font
-        - greetd
-        - kitty
-        - hyprland
-        - rclone
-        - rofi
-        - waybar
-        - vscode
-      loop_control:
-        loop_var: role
+  roles:
+    - { role: nserd.workstation_collection.common_packages, tags: [common_packages] }
+    - { role: nserd.workstation_collection.bash, tags: [bash] }
+    - { role: nserd.workstation_collection.font, tags: [font] }
+    - { role: nserd.workstation_collection.greetd, tags: [greetd] }
+    - { role: nserd.workstation_collection.kitty, tags: [kitty] }
+    - { role: nserd.workstation_collection.hyprland, tags: [hyprland] }
+    - { role: nserd.workstation_collection.rclone, tags: [rclone] }
+    - { role: nserd.workstation_collection.rofi, tags: [rofi] }
+    - { role: nserd.workstation_collection.waybar, tags: [waybar] }
+    - { role: nserd.workstation_collection.vscode, tags: [vscode] }
 
   handlers:
     - name: User directories update
