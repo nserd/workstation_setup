@@ -8,17 +8,19 @@
     waybar_temperature_hwmon_path: /sys/class/thermal/thermal_zone11/temp
 
     hyprland_monitors_manual_enabled: true
-    hyprland_monitors_manual: [",preferred,auto,1.733333"]
+    hyprland_monitors_manual:
+      - "eDP-1, preferred, 0x0, 1.733333"
+      - "HDMI-A-1, preferred, 0x-1080, 1"
     hyprland_print_key: F12
     hyprland_autostart:
       - clipman store --no-persists
-      - blueman-tray
+      - blueman-applet
+    hyprland_brightness_level_step: 1
 
     font_family_monospace: JetBrainsMono Nerd Font
 
     kitty_font_family: "{{ font_family_monospace }}"
     vscode_font_family: "{{ font_family_monospace }}"
-    hyprland_hyprlock_font_family: "{{ font_family_monospace }}"
     waybar_font_family: "{{ font_family_monospace }}"
 
   tasks:
