@@ -9,7 +9,7 @@
 
     hyprland_monitors_manual_enabled: true
     hyprland_monitors_manual:
-      - "eDP-1, preferred, 0x0, 1.733333"
+      - "eDP-1, preferred, 0x0, 1.73"
       - "HDMI-A-1, preferred, 0x-1080, 1"
     hyprland_print_key: F12
     hyprland_autostart:
@@ -50,9 +50,10 @@
         disable_gpg_check: true
       become: true
 
-    - name: Set ELECTRON_OZONE_PLATFORM_HINT variable
+    - name: Set environment variables
       ansible.builtin.copy:
-        content: export ELECTRON_OZONE_PLATFORM_HINT=auto
+        content: |
+          export ELECTRON_OZONE_PLATFORM_HINT=waybar
         dest: ~/.profile
         mode: u=rw,g=r,o=r
 
